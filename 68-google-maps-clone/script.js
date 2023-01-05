@@ -1,26 +1,35 @@
 const MAPBOX_ACCESS_TOKEN =
-  "pk.eyJ1Ijoid2ViZGV2c2ltcGxpZmllZCIsImEiOiJja2dyYTRqbW0weWl1MnJxaWF2dGR0ZHMwIn0.lU-OINCILi52P5N98qMbtA"
+  'pk.eyJ1IjoiaXZhbjUwMzAzIiwiYSI6ImNsY2lmc2VjYTJ2b3Azb24yY3ljZ3lnY3oifQ.ctFqdjXLKR5prArt62d2Hw'
+
+const map = new mapboxgl.Map({
+  accessToken: MAPBOX_ACCESS_TOKEN,
+  container: 'map', // container ID
+  style: 'mapbox://styles/mapbox/streets-v12', // style URL
+  center: [-74.5, 40], // starting position [lng, lat]
+  zoom: 9, // starting zoom
+})
 
 navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
-  enableHighAccuracy: true
+  enableHighAccuracy: true,
 })
 
 function setupMap(centerPosition) {
   const map = new mapboxgl.Map({
     accessToken: MAPBOX_ACCESS_TOKEN,
-    container: "map",
-    style: "mapbox://styles/mapbox/streets-v11",
-    center: centerPosition,
-    zoom: 15
+    container: 'map', // container ID
+    style: 'mapbox://styles/mapbox/streets-v12', // style URL
+    center: centerPosition, // starting position [lng, lat]
+    zoom: 15, // starting zoom
   })
 
   const navigationControls = new mapboxgl.NavigationControl()
   map.addControl(navigationControls)
 
   const directionControls = new MapboxDirections({
-    accessToken: MAPBOX_ACCESS_TOKEN
+    accessToken: MAPBOX_ACCESS_TOKEN,
   })
-  map.addControl(directionControls, "top-left")
+
+  map.addControl(directionControls, 'top-left')
 }
 
 function successLocation(position) {
